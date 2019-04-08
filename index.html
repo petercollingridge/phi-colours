@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Codeword</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="colour-range.css">
+    </head>
+
+    <body>
+
+        <h1>Colour range</h1>
+
+        <div id="colour-range">
+            <section>
+                <form>
+                    <div>
+                        <label for="input-red">R: </label>
+                        <input id="input-red" type="number" v-model="red">
+                    </div>
+                    <div>
+                        <label for="input-green">G: </label>
+                        <input id="input-green" type="number" v-model="green">
+                    </div>
+                    <div>
+                        <label for="input-blue">B: </label>
+                        <input id="input-blue" type="number" v-model="blue">
+                    </div>
+                </form>
+            </section>
+
+            <div>HSL: {{ hsl }}</div>
+
+            <section>
+                <h2>Colours</h2>
+
+                <label for="input-nColours">Colours: {{colourRange}}</label>
+                <input id="input-nColours" type="range" min="1" max="20" step="1" v-model="colourRange">
+
+                <div>
+                    <span v-for="n in nColours" class="colour-block" v-bind:style="{ backgroundColor: color1 }"></span>
+                </div>
+            </section>
+        </div>
+
+        <script src="colour-range.js"></script>
+
+    </body>
+</html>
