@@ -12,6 +12,7 @@ var vm = new Vue({
     },
     computed: {
         hsl: function() {
+            // https://www.rapidtables.com/convert/color/rgb-to-hsl.html
             var r = this.red / 255;
             var g = this.green / 255;
             var b = this.blue / 255;
