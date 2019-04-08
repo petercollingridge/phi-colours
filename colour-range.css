@@ -1,0 +1,7 @@
+.colour-block {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    border: 1px solid black;
+    margin-right: 10px;
+}
