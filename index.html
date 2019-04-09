@@ -16,6 +16,12 @@
 
         <div id="colour-range">
             <section>
+                <label for="input-nColours">Number of colours: {{ colourRange }}</label>
+                <input id="input-nColours" type="range" min="1" max="20" step="1" v-model="colourRange">
+            </section>
+
+            <section>
+                <h2>Initial colour</h2>
                 <form>
                     <div>
                         <label for="input-red">R: </label>
@@ -36,9 +42,6 @@
 
             <section>
                 <h2>Colours</h2>
-
-                <label for="input-nColours">Colours: {{colourRange}}</label>
-                <input id="input-nColours" type="range" min="1" max="20" step="1" v-model="colourRange">
 
                 <div>
                     <span v-for="colour in colours" class="colour-block" v-bind:style="getStyle(colour)">
