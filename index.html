@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Codeword</title>
+        <title>Colour range</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -41,7 +41,8 @@
                 <input id="input-nColours" type="range" min="1" max="20" step="1" v-model="colourRange">
 
                 <div>
-                    <span v-for="n in nColours" class="colour-block" v-bind:style="{ backgroundColor: color1 }"></span>
+                    <span v-for="colour in colours" class="colour-block" v-bind:style="getStyle(colour)">
+                    </span>
                 </div>
             </section>
         </div>
