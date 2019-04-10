@@ -23,22 +23,33 @@
             <section>
                 <h2>Initial colour</h2>
                 <form>
-                    <div>
-                        <label for="input-red">R: </label>
-                        <input id="input-red" type="number" v-model="red">
+                    <div class="control-row">
+                        <label for="input-red">R:</label>
+                        <span class="control-value">{{ red }}</span>
+                        <input id="input-red" type="range" min="0" max="255" :value="red" v-on:input="updateHSL($event, 'red')">
+
+                        <label for="input-hue">H:</label>
+                        <span class="control-value">{{ hue }}</span>
+                        <input id="input-hue" type="range" min="0" max="255" v-model="hue">
                     </div>
-                    <div>
+                    <div class="control-row">
                         <label for="input-green">G: </label>
-                        <input id="input-green" type="number" v-model="green">
+                        <span class="control-value">{{ green }}</span>
+                        <input id="input-green" type="range" min="0" max="255" :value="green" v-on:input="updateHSL($event, 'green')">
+                        <label for="input-saturation">S:</label>
+                        <span class="control-value">{{ saturation }}</span>
+                        <input id="input-saturation" type="range" min="0" max="1" step="0.01" v-model="saturation">
                     </div>
-                    <div>
+                    <div class="control-row">
                         <label for="input-blue">B: </label>
-                        <input id="input-blue" type="number" v-model="blue">
+                        <span class="control-value">{{ blue }}</span>
+                        <input id="input-blue" type="range" min="0" max="255" :value="blue" v-on:input="updateHSL($event, 'blue')">
+                        <label for="input-lightness">L:</label>
+                        <span class="control-value">{{ lightness }}</span>
+                        <input id="input-lightness" type="range" min="0" max="1" step="0.01" v-model="lightness">
                     </div>
                 </form>
             </section>
-
-            <div>HSL: {{ hsl }}</div>
 
             <section>
                 <h2>Colours</h2>

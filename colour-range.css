@@ -1,3 +1,24 @@
+.control-row {
+    display: flex;
+}
+
+.control-row * {
+    line-height: 1.5rem;
+}
+
+.control-row label {
+    font-size: 1.2rem;
+    width: 30px;
+}
+
+.control-row .control-value {
+    width: 30px;
+}
+
+.control-row input {
+    margin-right: 30px;
+}
+
 .colour-block {
     width: 32px;
     height: 32px;
