@@ -30,23 +30,25 @@
 
                         <label for="input-hue">H:</label>
                         <span class="control-value">{{ hue }}</span>
-                        <input id="input-hue" type="range" min="0" max="255" v-model="hue">
+                        <input id="input-hue" type="range" min="0" max="255" :value="hue" v-on:input="updateRGB($event, 'hue')">
                     </div>
                     <div class="control-row">
                         <label for="input-green">G: </label>
                         <span class="control-value">{{ green }}</span>
                         <input id="input-green" type="range" min="0" max="255" :value="green" v-on:input="updateHSL($event, 'green')">
+
                         <label for="input-saturation">S:</label>
                         <span class="control-value">{{ saturation }}</span>
-                        <input id="input-saturation" type="range" min="0" max="1" step="0.01" v-model="saturation">
+                        <input id="input-saturation" type="range" min="0" max="1" step="0.01" :value="saturation" v-on:input="updateRGB($event, 'saturation')">
                     </div>
                     <div class="control-row">
                         <label for="input-blue">B: </label>
                         <span class="control-value">{{ blue }}</span>
                         <input id="input-blue" type="range" min="0" max="255" :value="blue" v-on:input="updateHSL($event, 'blue')">
+
                         <label for="input-lightness">L:</label>
                         <span class="control-value">{{ lightness }}</span>
-                        <input id="input-lightness" type="range" min="0" max="1" step="0.01" v-model="lightness">
+                        <input id="input-lightness" type="range" min="0" max="1" step="0.01" :value="lightness" v-on:input="updateRGB($event, 'lightness')">
                     </div>
                 </form>
             </section>
@@ -55,8 +57,7 @@
                 <h2>Colours</h2>
 
                 <div>
-                    <span v-for="colour in colours" class="colour-block" v-bind:style="getStyle(colour)">
-                    </span>
+                    <span v-for="colour in colours" class="colour-block" v-bind:style="getStyle(colour)"></span>
                 </div>
             </section>
         </div>

@@ -11,37 +11,8 @@ var vm = new Vue({
        saturation: 0,
        lightness: 0,
        colourRange: 5,
-       color1: 'rgb(0, 0, 0)'
     },
     computed: {
-        hsl: function() {
-            var r = this.red / 255;
-            var g = this.green / 255;
-            var b = this.blue / 255;
-
-            var cMin = Math.min(r, g, b);
-            var cMax = Math.max(r, g, b);
-            var d = cMax - cMin;
-
-            if (d === 0) {
-                this.hue = 0;
-            } else if (cMax === r) {
-                this.hue = ((g - b) / d) % 6;
-            } else if (cMax === g) {
-                this.hue = (b - r) / d + 2;
-            } else if (cMax === b) {
-                this.hue = (r - g) / d + 4;
-            }
-
-            if (this.hue < 0) { this.hue += 6; }
-            this.hue = Math.round(this.hue * 60);
-            this.lightness = (cMin + cMax) / 2;
-            this.saturation = d ? d / this.absLightness(this.lightness) : 0;
-
-            this.color1 = "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")";
-
-            return Math.round(this.hue) + ", " + Math.round(this.saturation * 100) / 100 + " " + Math.round(this.lightness * 100) / 100;
-        },
         colours: function() {
             var colours = [];
             var n = parseInt(this.colourRange);
@@ -54,14 +25,6 @@ var vm = new Vue({
             return colours;
         }
     },
-    watch: {
-        // red: function() { this.updateHSL(); },
-        // green: function() { this.updateHSL(); },
-        // blue: function() { this.updateHSL(); },
-        // hue: function() { this.updateRGB(); },
-        // saturation: function() { this.updateRGB(); },
-        // lightness: function() { this.updateRGB(); },
-    },
     methods: {
         updateHSL: function(evt, attr) {
             this[attr] = evt.target.value;
@@ -70,7 +33,8 @@ var vm = new Vue({
             this.saturation = hsl[1];
             this.lightness = hsl[2];
         },
-        updateRGB: function() {
+        updateRGB: function(evt, attr) {
+            this[attr] = evt.target.value;
             var rgb = this.HSL2RGB(this.hue, this.saturation, this.lightness);
             this.red = rgb[0];
             this.green = rgb[1];
@@ -97,9 +61,9 @@ var vm = new Vue({
                 r = c; b = x;
             } 
 
-            r = (r + m) * 255;
-            g = (g + m) * 255;
-            b = (b + m) * 255;
+            r = Math.round((r + m) * 255);
+            g = Math.round((g + m) * 255);
+            b = Math.round((b + m) * 255);
 
             return [r, g, b];
         },
