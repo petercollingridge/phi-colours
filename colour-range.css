@@ -1,18 +1,23 @@
 .control-row {
     display: flex;
+    align-content: center;
+    margin-bottom: 16px;
 }
 
 .control-row * {
-    line-height: 1.5rem;
+    line-height: 1.2rem;
 }
 
 .control-row label {
     font-size: 1.2rem;
     width: 30px;
+    margin-bottom: 0;
 }
 
 .control-row .control-value {
-    width: 30px;
+    width: 40px;
+    margin-left: 5px;
+    text-align: center;
 }
 
 .control-row input {
