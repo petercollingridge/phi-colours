@@ -15,7 +15,6 @@ var vm = new Vue({
     },
     computed: {
         hsl: function() {
-            // https://www.rapidtables.com/convert/color/rgb-to-hsl.html
             var r = this.red / 255;
             var g = this.green / 255;
             var b = this.blue / 255;
@@ -34,7 +33,8 @@ var vm = new Vue({
                 this.hue = (r - g) / d + 4;
             }
 
-            this.hue *= 60;
+            if (this.hue < 0) { this.hue += 6; }
+            this.hue = Math.round(this.hue * 60);
             this.lightness = (cMin + cMax) / 2;
             this.saturation = d ? d / this.absLightness(this.lightness) : 0;
 
@@ -54,7 +54,28 @@ var vm = new Vue({
             return colours;
         }
     },
+    watch: {
+        // red: function() { this.updateHSL(); },
+        // green: function() { this.updateHSL(); },
+        // blue: function() { this.updateHSL(); },
+        // hue: function() { this.updateRGB(); },
+        // saturation: function() { this.updateRGB(); },
+        // lightness: function() { this.updateRGB(); },
+    },
     methods: {
+        updateHSL: function(evt, attr) {
+            this[attr] = evt.target.value;
+            var hsl = this.RBG2HSL(this.red, this.blue, this.green);
+            this.hue = hsl[0];
+            this.saturation = hsl[1];
+            this.lightness = hsl[2];
+        },
+        updateRGB: function() {
+            var rgb = this.HSL2RGB(this.hue, this.saturation, this.lightness);
+            this.red = rgb[0];
+            this.green = rgb[1];
+            this.blue = rgb[2];
+        },
         HSL2RGB: function(hue, saturation, lightness) {
             var c = this.absLightness(lightness) * saturation;
             var x = c * (1 - Math.abs((hue / 60) % 2 - 1));
@@ -82,6 +103,36 @@ var vm = new Vue({
 
             return [r, g, b];
         },
+        RBG2HSL: function(red, blue, green) {
+            // https://www.rapidtables.com/convert/color/rgb-to-hsl.html
+            red /= 255;
+            green /= 255;
+            blue /= 255;
+
+            var cMin = Math.min(red, green, blue);
+            var cMax = Math.max(red, green, blue);
+            var d = cMax - cMin;
+
+            var hue;
+            if (d === 0) {
+                hue = 0;
+            } else if (cMax === red) {
+                hue = ((green - blue) / d) % 6;
+            } else if (cMax === green) {
+                hue = (blue - red) / d + 2;
+            } else if (cMax === blue) {
+                hue = (red - green) / d + 4;
+            }
+
+            if (hue < 0) { hue += 6; }
+            hue = Math.round(hue * 60);
+
+            var lightness = (cMin + cMax) / 2;
+            var saturation = d ? Math.round(100 * d / this.absLightness(lightness)) / 100  : 0;
+            lightness = Math.round(100 * lightness) / 100;
+
+            return [hue, saturation, lightness];
+        },
         absLightness: function(lightness) {
             return 1 - Math.abs(2 * lightness - 1);
         },
@@ -94,5 +145,4 @@ var vm = new Vue({
             };
         }
     },
-
 });
