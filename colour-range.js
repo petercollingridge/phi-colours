@@ -98,6 +98,12 @@ var vm = new Vue({
 
             return [hue, saturation, lightness];
         },
+        RGB2Hex: function(red, green, blue) {
+            var hexR = (red || 0).toString(16);
+            var hexG = (green || 0).toString(16);
+            var hexB = (blue || 0).toString(16);
+            return "#" + hexR + hexG + hexB;
+         },
         absLightness: function(lightness) {
             return 1 - Math.abs(2 * lightness - 1);
         },
