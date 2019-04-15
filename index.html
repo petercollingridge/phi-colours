@@ -56,8 +56,23 @@
             <section>
                 <h2>Colours</h2>
 
-                <div>
-                    <span v-for="colour in colours" class="colour-block" v-bind:style="getStyle(colour)"></span>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Colour</th>
+                            <th>RGB</th>
+                            <th>Hex</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="colour in colours">
+                            <td><span class="colour-block" v-bind:style="getStyle(colour)"></span></td>
+                            <td>{{ colour.join(", ") }}</td>
+                            <td>{{ RGB2Hex.apply(null, colour) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
                 </div>
             </section>
         </div>
