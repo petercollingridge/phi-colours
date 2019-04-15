@@ -16,11 +16,12 @@ var vm = new Vue({
         colours: function() {
             var colours = [];
             var n = parseInt(this.colourRange);
+            var hue = parseInt(this.hue);
 
             for (var i = 0; i < n; i++) {
-                var hue = (this.hue + dHue * i) % 360;
                 var rgb = this.HSL2RGB(hue, this.saturation, this.lightness);
                 colours.push(rgb);
+                hue = (hue + dHue) % 360;
             }
             return colours;
         }
@@ -67,7 +68,7 @@ var vm = new Vue({
 
             return [r, g, b];
         },
-        RBG2HSL: function(red, blue, green) {
+        RBG2HSL: function(red, green, blue) {
             // https://www.rapidtables.com/convert/color/rgb-to-hsl.html
             red /= 255;
             green /= 255;
