@@ -99,11 +99,15 @@ var vm = new Vue({
             return [hue, saturation, lightness];
         },
         RGB2Hex: function(red, green, blue) {
-            var hexR = (red || 0).toString(16);
-            var hexG = (green || 0).toString(16);
-            var hexB = (blue || 0).toString(16);
+            var hexR = this.getHexValue(red);
+            var hexG = this.getHexValue(green);
+            var hexB = this.getHexValue(blue);
             return "#" + hexR + hexG + hexB;
-         },
+        },
+        getHexValue: function(n) {
+            n = (n || 0).toString(16);
+            return n.length === 1 ? "0" + n : n;
+        },
         absLightness: function(lightness) {
             return 1 - Math.abs(2 * lightness - 1);
         },
