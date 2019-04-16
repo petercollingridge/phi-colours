@@ -16,8 +16,11 @@
 
         <div id="colour-range">
             <section>
-                <label for="input-nColours">Number of colours: {{ colourRange }}</label>
-                <input id="input-nColours" type="range" min="1" max="20" step="1" v-model="colourRange">
+                <div class="control-row">
+                    <label for="input-nColours" style="width: 160px">Number of colours:</label>
+                    <span class="control-value">{{ colourRange }}</span>
+                    <input id="input-nColours" type="range" min="1" max="20" step="1" v-model="colourRange">
+                </div>
             </section>
 
             <section>
