@@ -37,3 +37,8 @@ table td {
     padding-right: 8px;
     text-align: center;
 }
+
+td > span {
+    margin-bottom: -4px;
+    margin-top: 4px;
+}
